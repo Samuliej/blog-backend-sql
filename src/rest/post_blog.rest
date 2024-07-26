@@ -1,0 +1,8 @@
+POST http://localhost:3000/api/blogs
+Content-Type: application/json
+
+{
+  "author": "Matti Heikäläinen",
+  "url": "www.great-blog-on.com",
+  "title": "How to write a greater blog"
+}
