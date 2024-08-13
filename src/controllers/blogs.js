@@ -37,6 +37,21 @@ router.post('/', async (req, res) => {
   }
 })
 
+/* PUT ROUTES */
+
+router.put('/:id', blogFinder, async (req, res) => {
+  if (req.blog) {
+    try {
+      let likedBlog = req.blog
+      likedBlog.likes++
+      await likedBlog.save()
+      res.status(200).json({ likes: likedBlog.likes })
+    } catch (error) {
+      res.status(500).json({ error: `Something went wrong updating the blog: ${error}` })
+    }
+  }
+})
+
 /* DELETE ROUTES */
 
 router.delete('/:id', blogFinder, async (req, res) => {
