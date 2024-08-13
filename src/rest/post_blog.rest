@@ -2,7 +2,7 @@ POST http://localhost:3000/api/blogs
 Content-Type: application/json
 
 {
-  "author": "Ukkeli",
-  "url": "www.blog.com",
-  "title": "How to blog"
+  "author": "Ukkeli blogaa",
+  "url": "www.blogia.com",
+  "title": "poika saunoo"
 }

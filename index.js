@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+require('express-async-errors')
 
 const { PORT } = require('./utils/config')
 const { connectToDatabase } = require('./utils/database')
