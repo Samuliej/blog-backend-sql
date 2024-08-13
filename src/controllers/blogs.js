@@ -1,6 +1,14 @@
 const express = require('express')
 const router = express.Router()
-const Blog = require('../models/blog')
+const { Blog } = require('../models')
+
+const blogFinder = async (req, res, next) => {
+  const id = req.params.id
+  req.blog = await Blog.findByPk(id)
+  if (req.blog)
+    next()
+  else return res.status(404).json({ error: `Did not find blog with id: ${id}` })
+}
 
 /* GET ROUTES */
 
@@ -13,7 +21,10 @@ router.get('/', async (req, res) => {
   }
 })
 
-
+router.get('/:id', blogFinder, async (req, res) =>
+  req.blog
+    ? res.status(200).json(req.blog)
+    : res.status(404).json({ error: `Something went wrong finding the blog` }))
 
 /* POST ROUTES */
 
@@ -28,15 +39,11 @@ router.post('/', async (req, res) => {
 
 /* DELETE ROUTES */
 
-router.delete('/:id', async (req, res) => {
-  const id = req.params.id
-  try {
-    const blogToDelete = await Blog.findByPk(id)
-    if (blogToDelete)
+router.delete('/:id', blogFinder, async (req, res) => {
+  if (req.blog) {
       await Blog.destroy({ where: { id: id } })
-    else return res.status(404).json({ error: `Did not find blog with id: ${id}` })
-    res.status(200).json({ message: `Blog ${blogToDelete.title} deleted succesfully.` })
-  } catch (error) {
+      res.status(200).json({ message: `Blog ${blogToDelete.title} deleted succesfully.` })
+  } else {
     res.status(500).json({ error: `Something went wrong deleting the blog: ${error}` })
   }
 })
