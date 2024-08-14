@@ -1,5 +1,6 @@
 POST http://localhost:3000/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbXBwYSIsImlkIjoxLCJpYXQiOjE3MjM2MjU1OTZ9.trc-9c7v9TJmfg2JtYg4WFpsbFN9c3zz50xM6S60Fz4
 
 {
   "author": "Ukkeli blogaa",
