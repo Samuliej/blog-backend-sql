@@ -26,7 +26,10 @@ router.post('/', async (req, res) => {
     name
   })
 
-  res.status(201).json(user)
+  const userWithoutHash = user.toJSON()
+  delete userWithoutHash.passwordHash
+
+  res.status(201).json(userWithoutHash)
 })
 
 /* PUT ROUTES */
