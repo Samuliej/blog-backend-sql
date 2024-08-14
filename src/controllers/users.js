@@ -16,6 +16,20 @@ router.get('/', async (req, res) => {
   res.status(200).json(users)
 })
 
+router.get('/:username', async (req, res) => {
+  console.log('username', req.params.username)
+  const user = await User.findOne({
+    where: { username: req.params.username },
+    attributes: { exclude: ['passwordHash'] },
+    include: {
+      model: Blog,
+      attributes: { exclude: ['userId'] }
+    }
+  })
+
+  res.status(200).json(user)
+})
+
 /* POST ROUTES */
 
 router.post('/', async (req, res) => {

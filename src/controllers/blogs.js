@@ -5,7 +5,13 @@ const tokenExtractor = require('../../utils/tokenExtractor')
 
 const blogFinder = async (req, res, next) => {
   const id = req.params.id
-  req.blog = await Blog.findByPk(id)
+  req.blog = await Blog.findByPk(id, {
+    attributes: { exclude: ['userId'] },
+    include: {
+      model: User,
+      attributes: ['name']
+    }
+  })
   if (req.blog)
     next()
   else return res.status(404).json({ error: `Did not find blog with id: ${id}` })
@@ -25,8 +31,7 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', blogFinder, async (req, res) => {
-  if (req.blog)
-    res.status(200).json(req.blog)
+  if (req.blog) res.status(200).json(req.blog)
 })
 
 /* POST ROUTES */
