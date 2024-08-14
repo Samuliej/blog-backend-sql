@@ -50,11 +50,15 @@ router.put('/:id', blogFinder, async (req, res) => {
 
 /* DELETE ROUTES */
 
-router.delete('/:id', blogFinder, async (req, res) => {
+router.delete('/:id', blogFinder, tokenExtractor, async (req, res) => {
   const id = req.params.id
-  if (req.blog) {
+  const user = await User.findByPk(req.decodedToken.id)
+
+  if (req.blog && req.blog.userId === user.id) {
     await Blog.destroy({ where: { id: id } })
     res.status(200).json({ message: `Blog ${req.blog.title} deleted succesfully.` })
+  } else {
+    res.status(500).json({ error: 'Not authorized to delete this blog' })
   }
 })
 
