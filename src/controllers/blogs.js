@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { Blog, User } = require('../models')
 const tokenExtractor = require('../../utils/tokenExtractor')
+const sequelize = require('sequelize')
 const { Op } = require('sequelize')
 
 const blogFinder = async (req, res, next) => {
@@ -46,7 +47,10 @@ router.get('/', async (req, res) => {
       model: User,
       attributes: ['name']
     },
-    where
+    where,
+    order: [
+      ['likes', 'DESC']
+    ]
   })
   res.status(200).json(blogs)
 })
