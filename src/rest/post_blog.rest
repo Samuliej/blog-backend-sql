@@ -5,5 +5,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imhpb
 {
   "author": "Himo Blogaaja",
   "url": "www.parhaatblogit.fi",
-  "title": "TOimiiKohan CasE SensItiiviSyys"
+  "title": "Lisää blogia"
 }
