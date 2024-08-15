@@ -25,6 +25,12 @@ User.init({
   name: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
   }
 }, {
   sequelize,

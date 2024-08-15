@@ -1,6 +1,6 @@
-PUT http://localhost:3000/api/users/ukkeli
+PUT http://localhost:3000/api/users/himo.blogaaja@mail.com
 Content-Type: application/json
 
 {
-  "username": "ukko"
+  "username": "kauhee.blogaaja@mail.com"
 }

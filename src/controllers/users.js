@@ -32,6 +32,7 @@ router.get('/:username', async (req, res) => {
 /* POST ROUTES */
 
 router.post('/', async (req, res) => {
+  try {
   const { username, name, password } = req.body
 
   const saltRounds = 10
@@ -47,6 +48,9 @@ router.post('/', async (req, res) => {
   delete userWithoutHash.passwordHash
 
   res.status(201).json(userWithoutHash)
+} catch (error) {
+  console.log(error)
+}
 })
 
 /* PUT ROUTES */
