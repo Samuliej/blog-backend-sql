@@ -17,7 +17,6 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:username', async (req, res) => {
-  console.log('username', req.params.username)
   const user = await User.findOne({
     where: { username: req.params.username },
     attributes: { exclude: ['passwordHash'] },
