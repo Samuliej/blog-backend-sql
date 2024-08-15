@@ -14,6 +14,10 @@ router.post('/', async (req, res) => {
     }
   })
 
+  if (!user) {
+    return res.status(404).json({ error: 'username or password incorrect' })
+  }
+
   const passwordCorrect = await bcrypt.compare(req.body.password, user.passwordHash)
 
   if (!(user && passwordCorrect)) {

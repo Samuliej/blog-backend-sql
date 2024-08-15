@@ -1,9 +1,10 @@
 POST http://localhost:3000/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhpbW8uYmxvZ2FhamFAbWFpbC5jb20iLCJpZCI6NiwiaWF0IjoxNzIzNzA4OTIzfQ.t4WtF0VjBxAAxZYvl59BAV0fJDQevvDUdSVENxthpyk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImthdWhlZS5ibG9nYWFqYUBtYWlsLmNvbSIsImlkIjoxLCJpYXQiOjE3MjM3Mjg5NDh9.pMFtPBr5shcqVseMXnDBJ9vOppLiNgnxPrIRCsfF5R8
 
 {
   "author": "Himo Blogaaja",
   "url": "www.parhaatblogit.fi",
-  "title": "Lisää blogia"
+  "title": "Uusi blogi",
+  "year": 2024
 }
