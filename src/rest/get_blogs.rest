@@ -1,2 +1,2 @@
-GET http://localhost:3000/api/blogs
+GET http://localhost:3000/api/blogs?search=blogaa
 Content-Type: application/json
