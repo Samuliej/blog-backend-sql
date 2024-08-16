@@ -1,10 +1,10 @@
 POST http://localhost:3000/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImthdWhlZS5ibG9nYWFqYUBtYWlsLmNvbSIsImlkIjoxLCJpYXQiOjE3MjM3Mjg5NDh9.pMFtPBr5shcqVseMXnDBJ9vOppLiNgnxPrIRCsfF5R8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVra2VsaUBtYWlsLmNvbSIsImlkIjoyLCJpYXQiOjE3MjM4MDQwNDJ9.ystRW1Vrao0-x87GXH10DN5QlssbK36JoV2cHjklj0E
 
 {
-  "author": "Himo Blogaaja",
-  "url": "www.parhaatblogit.fi",
-  "title": "Uusi blogi",
-  "year": 2024
+  "author": "Ukkeli",
+  "url": "www.blogaddresses.fi",
+  "title": "Blogia sataa",
+  "year": 2020
 }

@@ -6,14 +6,19 @@ const bcrypt = require('bcrypt')
 /* GET ROUTES */
 
 router.get('/', async (req, res) => {
-  const users = await User.findAll({
-    attributes: { exclude: ['passwordHash'] },
-    include: {
-      model: Blog,
-      attributes: { exclude: ['userId'] }
-    }
-  })
-  res.status(200).json(users)
+  try {
+    const users = await User.findAll({
+      attributes: { exclude: ['passwordHash'] },
+      include: {
+        model: Blog,
+        attributes: { exclude: ['userId'] }
+      }
+    })
+    res.status(200).json(users)
+  } catch (error) {
+    console.error('Error fetching users:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
 })
 
 router.get('/:username', async (req, res) => {
