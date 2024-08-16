@@ -1,10 +1,10 @@
 POST http://localhost:3000/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVra2VsaUBtYWlsLmNvbSIsImlkIjoyLCJpYXQiOjE3MjM4MDQwNDJ9.ystRW1Vrao0-x87GXH10DN5QlssbK36JoV2cHjklj0E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbXBwYUBtYWlsLmNvbSIsImlkIjoyLCJpYXQiOjE3MjM4MTIxOTh9.4OssOL-Ee-XFDI0A9ZmUj62JkBOTxh-yxrxUUZrjTNc
 
 {
-  "author": "Ukkeli",
-  "url": "www.blogaddresses.fi",
-  "title": "Blogia sataa",
+  "author": "Samppa",
+  "url": "www.address.fi",
+  "title": "sampan toinen blogi",
   "year": 2020
 }

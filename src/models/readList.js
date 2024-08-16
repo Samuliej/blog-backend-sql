@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize')
-
 const { sequelize } = require('../../utils/database')
 
 class Readlist extends Model {}
@@ -10,11 +9,6 @@ Readlist.init({
     primaryKey: true,
     autoIncrement: true
   },
-  read: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
-    allowNull: false
-  },
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -24,11 +18,21 @@ Readlist.init({
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'blogs', key: 'id' }
+  },
+  read: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
   }
 }, {
   sequelize,
   underscored: true,
-  timestamps: false,
+  timestamps: true,
   modelName: 'readlist'
 })
 
