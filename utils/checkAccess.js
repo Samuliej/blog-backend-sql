@@ -15,7 +15,7 @@ const checkAccess = async (req, res, user) => {
   }
 
   const activeSession = await Session.findOne({
-    where: { user_id: user.id, token: user.token },
+    where: { userId: user.id, token: user.token },
   })
 
   if (!activeSession) {

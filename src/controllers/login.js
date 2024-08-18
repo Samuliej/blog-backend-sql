@@ -37,14 +37,14 @@ router.post('/', async (req, res) => {
 
   try {
     const oldSession = await Session.findOne({
-      where: { user_id: user.id },
+      where: { userId: user.id },
       attributes: ['id']
     })
     if (oldSession) {
       // Invalidate old sessions
       await Session.destroy({
         where: {
-          user_id: user.id
+          userId: user.id
         }
       })
     }
@@ -62,7 +62,7 @@ router.post('/', async (req, res) => {
   await user.save()
 
   await Session.create({
-    user_id: user.id,
+    userId: user.id,
     token: token
   })
 

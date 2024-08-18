@@ -1,6 +1,6 @@
 POST http://localhost:3000/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVra2VsaUBtYWlsLmNvbSIsImlkIjozLCJpYXQiOjE3MjM5ODQ1MzV9.1Jfs4hrSI3xOlXU341px-WifY6x5pA48mKwxywe67J8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVra2VsaUBtYWlsLmNvbSIsImlkIjoxLCJpYXQiOjE3MjM5ODU0NDh9.Z3RrilgIus_Etff3Z7euvv_YugRMnF3KT11tyTi54J8
 
 {
   "author": "Ukkeli",

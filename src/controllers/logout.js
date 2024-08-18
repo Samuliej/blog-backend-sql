@@ -14,7 +14,7 @@ router.post('/', tokenExtractor, async (req, res) => {
 
   await Session.destroy({
     where: {
-      user_id: user.id
+      userId: user.id
     }
   })
 
