@@ -3,6 +3,8 @@ const router = express.Router()
 const { User, Blog, Readlist } = require('../models')
 const bcrypt = require('bcrypt')
 const { Op } = require('sequelize')
+const tokenExtractor = require('../../utils/tokenExtractor')
+const checkAccess = require('../../utils/checkAccess')
 
 /* GET ROUTES */
 
@@ -90,15 +92,26 @@ router.post('/', async (req, res) => {
 
 /* PUT ROUTES */
 
-router.put('/:username', async (req, res) => {
-  let userToModify = await User.findOne({
-    where: { username: req.params.username },
-    attributes: { exclude: ['passwordHash'] }
-  })
-  userToModify.username = req.body.username
-  await userToModify.save()
+router.put('/:username', tokenExtractor, async (req, res) => {
+  const user = await User.findByPk(req.decodedToken.id)
+  if (!user) {
+    res.status(404).json({ error: 'User not found' })
+  }
+  if (checkAccess(req, res, user)) {
 
-  res.status(200).json(userToModify)
+    let userToModify = await User.findOne({
+      where: { username: req.params.username },
+      attributes: { exclude: ['passwordHash'] }
+    })
+    if (userToModify.id === user.id) {
+      userToModify.username = req.body.username
+      await userToModify.save()
+
+      res.status(200).json(userToModify)
+    } else {
+      return res.status(401).json({ error: 'You are not authorized to modify this item' })
+    }
+  }
 })
 
 module.exports = router

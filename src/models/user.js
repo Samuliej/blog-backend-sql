@@ -31,6 +31,21 @@ User.init({
   },
   updatedAt: {
     type: DataTypes.DATE,
+  },
+  admin: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
+  token: {
+    type: DataTypes.STRING
+  },
+  tokenDisabled: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
+  userDisabled: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
   }
 }, {
   sequelize,

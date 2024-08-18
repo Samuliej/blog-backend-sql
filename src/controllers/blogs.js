@@ -2,13 +2,12 @@ const express = require('express')
 const router = express.Router()
 const { Blog, User } = require('../models')
 const tokenExtractor = require('../../utils/tokenExtractor')
-const sequelize = require('sequelize')
 const { Op } = require('sequelize')
+const checkAccess = require('../../utils/checkAccess')
 
 const blogFinder = async (req, res, next) => {
   const id = req.params.id
   req.blog = await Blog.findByPk(id, {
-    attributes: { exclude: ['userId'] },
     include: {
       model: User,
       attributes: ['name']
@@ -63,18 +62,24 @@ router.get('/:id', blogFinder, async (req, res) => {
 
 router.post('/', tokenExtractor, async (req, res) => {
   const user = await User.findByPk(req.decodedToken.id)
-  const blog = await Blog.create({ ...req.body, userId: user.id, date: new Date() })
-  res.status(201).json(blog)
+  const hasAccess = await checkAccess(req, res, user)
+  if (hasAccess) {
+    const blog = await Blog.create({ ...req.body, userId: user.id, date: new Date() })
+    res.status(201).json(blog)
+  }
 })
 
 /* PUT ROUTES */
 
-router.put('/:id', blogFinder, async (req, res) => {
-  if (req.blog) {
-    let likedBlog = req.blog
-    likedBlog.likes++
-    await likedBlog.save()
-    res.status(200).json({ likes: likedBlog.likes })
+router.put('/:id', blogFinder, tokenExtractor, async (req, res) => {
+  const user = await User.findByPk(req.decodedToken.id)
+  if (checkAccess(req, res, user)) {
+    if (req.blog) {
+      let likedBlog = req.blog
+      likedBlog.likes++
+      await likedBlog.save()
+      res.status(200).json({ likes: likedBlog.likes })
+    }
   }
 })
 
@@ -83,12 +88,13 @@ router.put('/:id', blogFinder, async (req, res) => {
 router.delete('/:id', blogFinder, tokenExtractor, async (req, res) => {
   const id = req.params.id
   const user = await User.findByPk(req.decodedToken.id)
-
-  if (req.blog && req.blog.userId === user.id) {
-    await Blog.destroy({ where: { id: id } })
-    res.status(200).json({ message: `Blog ${req.blog.title} deleted succesfully.` })
-  } else {
-    res.status(500).json({ error: 'Not authorized to delete this blog' })
+  if (checkAccess(req, res, user)) {
+    if (req.blog && req.blog.userId === user.id) {
+      await Blog.destroy({ where: { id: id } })
+      res.status(200).json({ message: `Blog ${req.blog.title} deleted succesfully.` })
+    } else {
+      res.status(500).json({ error: 'Not authorized to delete this blog' })
+    }
   }
 })
 

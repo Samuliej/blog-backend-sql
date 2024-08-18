@@ -61,6 +61,20 @@ module.exports = {
       }
     })
 
+    await queryInterface.addColumn('users', 'token', {
+      type: DataTypes.STRING
+    })
+
+    await queryInterface.addColumn('users', 'token_disabled', {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    })
+
+    await queryInterface.addColumn('users', 'user_disabled', {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    })
+
     await queryInterface.addColumn('blogs', 'user_id', {
       type: DataTypes.INTEGER,
       allowNull: false,
